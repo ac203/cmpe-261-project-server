@@ -6,11 +6,6 @@ public class UserService extends UnicastRemoteObject implements IUserService {
     }
 
     @Override
-    public User login(String userName, String password) throws RemoteException {
-        return null;
-    }
-
-    @Override
     public User getUserFromUserList(String userName, String password) throws RemoteException {
         // get registered user from user list
 

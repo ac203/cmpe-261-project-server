@@ -23,6 +23,7 @@ public class Main {
         // test user
         initUser();
 
+        // basic ui for the server
         JFrame jFrame = new JFrame();
         jFrame.setSize(500,600);
 
@@ -90,9 +91,11 @@ public class Main {
 
     private static void establishConnection() {
         try {
+            // create service instances
             userService = new UserService();
             noteService = new NoteService();
 
+            // get registry and bind service methods to registry
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             Naming.rebind("rmi://localhost/userService", userService);
             Naming.rebind("rmi://localhost/noteService", noteService);
@@ -105,6 +108,7 @@ public class Main {
     }
 
     private static void closeConnection() throws MalformedURLException, NotBoundException, RemoteException {
+        // unbind service from registry to close connection
         Naming.unbind("rmi://localhost/userService");
         Naming.unbind("rmi://localhost/noteService");
         UnicastRemoteObject.unexportObject(userService, false);
